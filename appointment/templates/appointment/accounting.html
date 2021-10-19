@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        <h3>Đặc điểm nổi bật</h3>
+        <div class="card card-body">
+            <table class="table table-striped">
+                <thead> 
+                    <th>Bệnh nhân</th>
+                    <th>Đặc điểm nổi bật</th>
+                    <th>Thanh toán</th>
+                    <th>Nhắc nhở</th>
+                </thead>
+                {% for obj in payment_ind %}
+                <tr>
+                    <td>{{ obj.patient }}</td>
+                    <td>{{ obj.outstanding }}</td>
+                    <td>{{ obj.paid }}</td>
+                    <td><button class="btn btn-primary">Thiết lập nhắc nhở</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <h3>Sự tư vấn đặc biệt </h3>
+        <div class="card card-body">
+            <table class="table table-striped">
+                <thead> 
+                    <th>Ngày</th>
+                    <th>Tên bệnh nhân</th>
+                    <th>Thanh toán</th>
+                    <th>Điểm nôi bật</th>
+                    <th>Tổng</th>
+                    <th>Hóa đơn</th>
+                </thead>
+                {% for obj in payment_cons %}
+                <tr>
+                    <td>{{ obj.date }}</td>
+                    <td>{{ obj.patient }}</td>
+                    <td>{{ obj.paid }}</td>
+                    <td>{{ obj.outstanding }}</td>
+                    <td>{{ obj.total }}</td>
+                    <td><a href="">Xem hóa đơn</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="wraper">
+  <div class="jumbotron" style="border-radius: 0%;">
+      <p>
+        Bệnh viện Việt Pháp Hà Nội là bệnh viện quốc tế đầu tiên ở Hà Nội và miền Bắc Việt Nam
+      </p>
+      <p>
+        Đây là một bệnh viện quốc tế do tập đoàn tư nhân sở hữu. Bệnh viện tập hợp đội ngũ chuyên gia y tế đa chuyên khoa người Việt nam và nước ngoài, kết hợp công nghệ kỹ thuật mới nhất, trình độ chuyên môn cao với chất lượng chăm sóc khách hàng chuyên nghiệp.
+        Hoạt động theo mô hình bệnh viện đa khoa, Bệnh viện cung cấp hầu hết các dịch vụ khám và điều trị cho tất cả vấn đề y tế thường gặp.
+      </p>
+  </div>
+  
+  <div id="introImage" class="jumbotron" style="border-radius: 0%; margin-left: 40px;">
+      
+  </div>
+</div>
+
+<style>
+  .jumbotron{
+    display: inline-block;
+    width: 40%;
+    text-align: left;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  .jumbotron p{
+    font-size: 18px;
+  }
+  #wraper{
+    margin: auto;
+    text-align: center;
+  }
+  #introImage{
+    background-image: url("../../../static/images/hospitalThumbnail.jpg");
+    background-size: cover;
+  }
+</style>
+{% endblock %}

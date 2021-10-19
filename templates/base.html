@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bệnh viện xịn</title>
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+
+  </head>
+
+
+  <body>
+    <div style="height: 100px;">
+      <img src="../static/images/logo.jpg"  width="100px" style="margin-top: 13px;"/>
+      {% if not user.is_authenticated %}
+          <a href="{% url 'account:login' %}" class="btn btn-simple" style="margin-left: 70%;"><button class="btn btn-success">Đăng nhập</button></a>
+          <a href="{% url 'account:signup' %}" class="btn btn-simple" style="display: inline-block;">Đăng ký</a>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+          <a href="{% url 'account:logout' %}" class="btn btn-primary"  style="margin-left: 80%;">Đăng xuất</a>
+      {% endif %}
+          
+
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation" id="navbar" style="height: 30px;">
+    			<div class="container">
+
+    					<ul class="nav navbar-nav navbar-right mynav">
+    						{% if user.is_authenticated %}
+                      {% if user.is_doctor %}
+                      <!-- doctor's dashboard -->
+                      <li><a href="{% url 'account:home' %}"class="btn btn-simple">Trang chủ</a></li>
+                      <li><a href="{% url 'account:about-us' %}"class="btn btn-simple">Về chúng tôi</a></li>
+                      <li><a href="{% url 'account:contact' %}"class="btn btn-simple">Liên hệ</a></li>
+                      <li><a href="{% url 'user_profile:profile' %}" class="btn btn-simple">Thông tin</a></li>
+                      <li><a href="{% url 'appointment:doctor-appointments' %}"class="btn btn-simple">Cuộc hẹn</a></li>
+                      <li><a href="{% url 'appointment:doc-prescriptions' %}"class="btn btn-simple">Đơn thuốc</a></li>
+                      {% endif %}
+                      {% if user.is_patient %}
+                      <!-- patient's dashboard -->
+                      <li><a href="{% url 'account:home' %}"class="btn btn-simple">Trang chủ</a></li>
+                      <li><a href="{% url 'account:about-us' %}"class="btn btn-simple">Về chúng tôi</a></li>
+                      <li><a href="{% url 'account:contact' %}"class="btn btn-simple">Liên hệ</a></li>
+                      <li><a href="{% url 'appointment:patient-appointments' %}"class="btn btn-simple">Thuộc về cuộc hẹn của bạn</a></li>
+                      <li><a href="{% url 'appointment:pat_payments' %}"class="btn btn-simple">Hóa đơn và thanh toán</a></li>
+                      <li><a href="{% url 'user_profile:profile' %}" class="btn btn-simple">Thông tin</a></li>
+                      <li><a href="{% url 'appointment:med-history' %}"class="btn btn-simple">Bệnh án</a></li>
+                      {% endif %}
+                      {% if user.is_receptionist %}
+                      <!-- receptionist's dashboard -->
+                      <li><a href="{% url 'account:home' %}"class="btn btn-simple">Trang chủ</a></li>
+                      <li><a href="{% url 'account:about-us' %}"class="btn btn-simple">Về chúng tôi</a></li>
+                      <li><a href="{% url 'account:contact' %}"class="btn btn-simple">Liên hệ</a></li>
+                      <li><a href="{% url 'appointment:r_dashboard' %}"class="btn btn-simple">Bảng tác vụ</a></li>
+                      {% endif %}
+                      {% if user.is_HR %}
+                      <!-- HR's dashboard -->
+                      <li><a href="{% url 'account:home' %}"class="btn btn-simple">Trang chủ</a></li>
+                      <li><a href="{% url 'account:about-us' %}"class="btn btn-simple">Về chúng tôi</a></li>
+                      <li><a href="{% url 'account:contact' %}"class="btn btn-simple">Liên hệ</a></li>
+                      <li><a href="{% url 'appointment:hr_dashboard' %}"class="btn btn-simple">Bảng tác vụ</a></li>
+                      <li><a href="{% url 'appointment:hr_accounting' %}"class="btn btn-simple">Ké toán</a></li>
+                      {% endif %}
+    						{% else %}
+                      <li><a href="{% url 'account:about-us' %}"class="btn btn-simple">Về chúng tôi</a></li>
+                      <li><a href="{% url 'account:contact' %}"class="btn btn-simple">Liên hệ</a></li>
+    						{% endif %}
+    					</ul>
+    			</div>
+    		</nav>
+        <div class="container mycontent">
+          {% block content %}
+
+          {% endblock %}
+
+        </div>
+
+
+
+<canvas id="canvas"></canvas>
+
+
+
+  </body>
+  
+</html>

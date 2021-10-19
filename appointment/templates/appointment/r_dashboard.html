@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">Bảng tác vụ</h1>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Tổng số lịch hẹn</strong> - {{ totalApp }}
+        </li>
+        <li class="list-group-item">
+            <strong>Cuộc hẹn đã diễn ra</strong> - {{ compApp }}
+        </li>
+        <li class="list-group-item">
+            <strong>Cuộc họp sắp tới</strong> - {{ pendApp }}
+        </li>  
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <h3>Các cuộc hẹn -</h3>
+        <div class="card card-body">
+            <a href="{% url 'appointment:appointment-create' %}"><button class="btn btn-primary">Tạo cuộc hẹn</button></a>
+            <table class="table table-striped">
+                <thead>
+                    <th>Ngày</th>
+                    <th>Giờ</th>
+                    <th>Bác sĩ</th>
+                    <th>Bệnh nhân</th>
+                    <th>Trạng thái</th>
+                </thead>
+                {% for obj in app_list %}
+                <tr>
+                    <td>{{ obj.date }}</td>
+                    <td>{{ obj.time }}</td>
+                    <td>{{ obj.doctor }}</td>
+                    <td>{{ obj.patient }}</td>
+                    <td>{{ obj.status }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-7">
+        <h3>5 bênh nhân cuối -</h3>
+        <div class="card card-body">
+            <a href="{% url 'user_profile:profile-create' %}"><button class="btn btn-primary">Tạo bênh nhân</button></a>
+            <table class="table table-striped">
+                <thead> 
+                    <th>Tên</th>
+                    <th>SĐT</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Tuổi</th>
+                    <th>Cập nhật</th>
+                    <th>Xóa</th>
+                </thead>
+                {% for obj in pat_list %}
+                <tr>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.phone }}</td>
+                    <td>{{ obj.email }}</td>
+                    <td>{{ obj.gender }}</td>
+                    <td>{{ obj.age }}</td>
+                    <td><a href="{% url 'user_profile:profile-pk' pk=obj.user.id %}"><button class="btn btn-warning">Cập nhật</button></a></td>
+                    <td><a href="{% url 'user_profile:profile-delete' pk=obj.user.id %}"><button class="btn btn-danger">Xóa</button></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

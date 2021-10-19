@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<div class="container">
+    <h2>Cuộc hẹn của bạn</h2>
+    <div>
+        {% if user.is_patient %}
+        <table class="table table-striped">
+            <thead>
+                <th>Ngày</th>
+                <th>Thời gian</th>
+                <th>Bác sĩ tư vấn</th>
+                <th>Trạng thái</th>
+            </thead>
+            {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.doctor }}</td>
+                <td>{{ obj.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if user.is_doctor %}
+        <table class="table table-striped">
+            <thead>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Thông tin bệnh nhân</th>
+            </thead>
+            {% for obj in object_list %}
+            <tr>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.patient }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>  
+</div>
+{% endblock %}

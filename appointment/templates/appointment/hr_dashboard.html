@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">Bảng tác vụ</h1>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Tổng số bác sĩ</strong> - {{ totalDoc }}
+        </li>
+        <li class="list-group-item">
+            <strong>Tổng số bệnh nhân</strong> - {{ totalPat }}
+        </li>
+        <li class="list-group-item">
+            <strong>Bác sĩ trực</strong> - {{ ondutyDoc }}
+        </li>  
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Các bác sĩ</h3>
+        <div class="card card-body">
+            <table class="table table-striped">
+                <thead> 
+                    <th>Tên</th>
+                    <th>SĐT</th>
+                    <th>Email</th>
+                    <th>Giới tinhs</th>
+                    <th>Tuổi</th>
+                    <th>Trạng thái</th>
+                    <th>Phòng ban</th>
+                    <th>Điểm danh</th>
+                    <th>Lương</th>
+                    <th>Cập nhật</th>
+                    <th>Xóa</th>
+                </thead>
+                {% for obj in doc_list %}
+                <tr>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.phone }}</td>
+                    <td>{{ obj.email }}</td>
+                    <td>{{ obj.gender }}</td>
+                    <td>{{ obj.age }}</td>
+                    <td>{{ obj.status }}</td>
+                    <td>{{ obj.department }}</td>
+                    <td>{{ obj.attendance }}</td>
+                    <td>{{ obj.salary }}</td>
+                    <td><a href="{% url 'user_profile:doc-profile-pk' pk=obj.user.id %}"><button class="btn btn-warning">Cập nhật</button></a></td>
+                    <td><a href="{% url 'user_profile:doc-profile-delete' pk=obj.user.id %}"><button class="btn btn-danger">Xóa</button></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
